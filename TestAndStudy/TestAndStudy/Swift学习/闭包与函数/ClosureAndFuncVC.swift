@@ -12,7 +12,9 @@ class ClosureAndFuncVC:BaseViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ctest3()
+        ctest4(a: 1, b: 1) {
+            
+        }
     }
     
     //MARK: 闭包的定义
@@ -60,6 +62,23 @@ class ClosureAndFuncVC:BaseViewController{
             return num1+num2
         }
     }
+    
+    //逃逸闭包  一般在涉及到异步操作时，闭包放在异步线程里，在这种情况下就会出现逃逸闭包，特别是在网络请求时会出现这种情况
+    func ctest4(a:Int, b:Int, c:@escaping ()->Void){
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()+5){
+            c();
+        }
+        print("函数执行完毕")
+    }
+    
+    
+    public func assert(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> String = String(), file: StaticString = #file, line: UInt = #line) {
+        if !condition() {
+            print(message())
+        }
+    }
+ 
+    
     
     func add(a:Int, b:Int, c:(Int, Int)->Int){
        print(c(a,b));
