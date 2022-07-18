@@ -15,6 +15,8 @@ class ClosureAndFuncVC:BaseViewController{
         ctest4(a: 1, b: 1) {
             
         }
+        
+        ctest5(predicate: 3>1)
     }
     
     //MARK: 闭包的定义
@@ -72,9 +74,9 @@ class ClosureAndFuncVC:BaseViewController{
     }
     
     
-    public func assert(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> String = String(), file: StaticString = #file, line: UInt = #line) {
-        if !condition() {
-            print(message())
+    func ctest5( predicate:@autoclosure ()->Bool){
+        if(predicate()){
+            print("自动闭包")
         }
     }
  
